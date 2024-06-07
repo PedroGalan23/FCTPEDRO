@@ -11,7 +11,7 @@
     <img src="logo__.svg" alt="Logo mal">
     <h1>Inicio de Sesión</h1>
     <input type="text" name="usuario" placeholder="Nombre">
-    <input type="password" name="contraseña" placeholder="Contraseña">
+    <input type="password" name="password" placeholder="Contraseña">
     <input id="submit" type="submit" name="inicioEnviar" value="Iniciar Sesion">
     <?php
         $host='localhost';
@@ -21,14 +21,24 @@
         try{
             //isset devuelve true si la variable incioEnviar está definida en el array Post y no es null
          if(isset($_POST["inicioEnviar"])){
-            if(empty($_POST["usuario"]) || empty($_POST["contraseña"])){
-                echo'<div class="bad">Los campos están vacíos</div>';
+            if(empty($_POST["usuario"]) || empty($_POST["password"])){
+                echo'<div class="bad">Alguno de los campos está vacío</div>';
             }else{
                 $pdo=new PDO("mysql:host=$host;dbname=$dbname;charset=utf8",$user,$pass);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                $usuario=$_POST["usuario"];
+                $password=$_POST["password"];
+                //Diferenciación del alumno
+                //los ? son indicadores de posición de los valores para los que se va a ejecutar la consulta
+                $sql_alumno="SELECT * FROM alumno WHERE nombre=? AND password=? ";
+                $stmt_alumno = $pdo->prepare($sql_alumno);
+                $stmt_alumno->execute([$usuario,$password]);
+                if($stmt_alumno->rowCount()> 0){
+                 header("location:dashboardAlumno.php");
+                }
+
             }
          }
-
          }catch(PDOException $e){
             echo "Se ha producido un error al intentar conectar el servidor SQL";
             }
