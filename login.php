@@ -36,7 +36,12 @@
                 if($stmt_alumno->rowCount()> 0){
                  header("location:dashboardAlumno.php");
                 }
-
+                $sql_tutor="SELECT * FROM tutor where nombre=? AND password=?";
+                $stmt_tutor = $pdo->prepare($sql_tutor);
+                $stmt_tutor->execute([$usuario,$password]);
+                if($stmt_tutor->rowCount()> 0){
+                    header("location:crudtutor.php");
+                }
             }
          }
          }catch(PDOException $e){
