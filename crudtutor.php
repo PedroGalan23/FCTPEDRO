@@ -14,6 +14,11 @@ $result = $stmt->fetchAll();
 //Para comprobar que todo esté correcto usaremos var_dump que mostrará todos los elementos del array
 //var_dump($result);
 //El array mostrado en con var_dump vamos a mostrarlo en la tabla
+$articulosxPagina=6;
+//Contar empresas de nuestra bd
+$numeroEmpresas=$stmt->rowCount();
+echo $numeroEmpresas;
+$paginas=ceil($numeroEmpresas/$articulosxPagina);
 
 ?>
 
@@ -57,6 +62,7 @@ $result = $stmt->fetchAll();
         <?php echo "</tr>" ?>
     <?php endforeach ?>
     </table>
+
     <nav aria-label="...">
       <ul class="pagination">
          <li class="page-item disabled">
