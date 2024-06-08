@@ -12,7 +12,9 @@ $stmt->execute();
 //Se guardan todos los resultados de la base de datos
 $result = $stmt->fetchAll();
 //Para comprobar que todo esté correcto usaremos var_dump que mostrará todos los elementos del array
-var_dump($result);
+//var_dump($result);
+//El array mostrado en con var_dump vamos a mostrarlo en la tabla
+
 ?>
 
 
@@ -25,7 +27,36 @@ var_dump($result);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+
     <h1>Crud Empresa</h1>
+    <table>
+    <tr>
+            <th>Nombre</th>
+            <th>Cif</th>
+            <th>Nombre_fiscal</th>
+            <th>Email</th>
+            <th>Direccion</th>
+            <th>Localidad</th>
+            <th>Provincia</th>
+            <th>Numero_plazas</th>
+            <th>Telefono</th>
+            <th>Persona_contacto</th>
+    </tr>
+    <?php foreach( $result as $empresa ): ?>
+        <?php echo "<tr>" ?>
+        <?php echo "<td>".$empresa['nombre']."</td>" ?>
+        <?php echo "<td>".$empresa['cif']."</td>" ?>
+        <?php echo "<td>".$empresa['nombre_fiscal']."</td>" ?>
+        <?php echo "<td>".$empresa['email']."</td>" ?>
+        <?php echo "<td>".$empresa['direccion']."</td>" ?>
+        <?php echo "<td>".$empresa['localidad']."</td>" ?>
+        <?php echo "<td>".$empresa['provincia']."</td>" ?>
+        <?php echo "<td>".$empresa['numero_plazas']."</td>" ?>
+        <?php echo "<td>".$empresa['telefono']."</td>" ?>
+        <?php echo "<td>".$empresa['persona_contacto']."</td>" ?>
+        <?php echo "</tr>" ?>
+    <?php endforeach ?>
+    </table>
     <nav aria-label="...">
       <ul class="pagination">
          <li class="page-item disabled">
