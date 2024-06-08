@@ -1,3 +1,13 @@
+<?php
+try {
+    $pdo=new PDO('mysql:host=localhost;dbname=control_fct','root','');
+  //  echo 'conexión completada con exito';
+} catch (PDOException $e) {
+    echo "Ha ocurrido un error en la conexión a la bd";
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
