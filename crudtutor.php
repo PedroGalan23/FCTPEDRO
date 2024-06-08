@@ -74,8 +74,13 @@ echo $paginas;
         <?php
             for($i= 0;$i<=$paginas;$i++){
                 //Metodo Get
-               echo '<li class="page-item"><a class="page-link" href="crudtutor.php?pagina='.($i+1).'">'.($i+1).'</a></li>';
+                /*
+                El metodo GET para active hace que si la pagina recogida por GET , es decir la página actual es igual a la página mostrada
+                entonces dará como resultado 'active' lo cual es una clase de
+                */
+                echo '<li class="page-item' . ($_GET['pagina'] == $i + 1 ? ' active' : '') . '"><a class="page-link" href="crudtutor.php?pagina=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
             }
+            
         ?>
         <li class="page-item">
             <a class="page-link" href="#">Siguiente</a>
