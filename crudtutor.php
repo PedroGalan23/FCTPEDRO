@@ -73,8 +73,8 @@ echo $paginas;
          </li>
         <?php
             for($i= 0;$i<=$paginas;$i++){
-                //Metodo Get
                 /*
+                Utilizando el
                 El metodo GET para active hace que si la pagina recogida por GET , es decir la página actual es igual a la página mostrada
                 entonces dará como resultado 'active' lo cual es una clase de
                 */
@@ -83,7 +83,7 @@ echo $paginas;
             
         ?>
         <li class="page-item">
-            <a class="page-link" href="#">Siguiente</a>
+            <a class="page-link" href="crudtutor.php?pagina=<?php echo $_GET['pagina']+1?>">Siguiente</a>
         </li>
         </ul>
     </nav>
