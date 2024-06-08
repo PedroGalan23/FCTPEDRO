@@ -5,6 +5,14 @@ try {
 } catch (PDOException $e) {
     echo "Ha ocurrido un error en la conexión a la bd";
 }
+//Llamada a todos los artículos
+$sql='SELECT * FROM empresa';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+//Se guardan todos los resultados de la base de datos
+$result = $stmt->fetchAll();
+//Para comprobar que todo esté correcto usaremos var_dump que mostrará todos los elementos del array
+var_dump($result);
 ?>
 
 
