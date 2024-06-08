@@ -15,10 +15,12 @@ $result = $stmt->fetchAll();
 //var_dump($result);
 //El array mostrado en con var_dump vamos a mostrarlo en la tabla
 $articulosxPagina=6;
-//Contar empresas de nuestra bd
+//Contar empresas de nuestra bd utilizando el metodo rowCount que cuenta las filas de un arrray
 $numeroEmpresas=$stmt->rowCount();
-echo $numeroEmpresas;
+//echo $numeroEmpresas;
+//numero de paginas totales,usamos ceil para redondear
 $paginas=ceil($numeroEmpresas/$articulosxPagina);
+echo $paginas;
 
 ?>
 
@@ -66,15 +68,15 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
     <nav aria-label="...">
       <ul class="pagination">
          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
+            <a class="page-link">Anterior</a>
          </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active" aria-current="page">
-             <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <?php
+            for($i= 0;$i<=$paginas;$i++){
+               echo '<li class="page-item"><a class="page-link" href="#">'.($i+1).'</a></li>';
+            }
+        ?>
         <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="page-link" href="#">Siguiente</a>
         </li>
         </ul>
     </nav>
