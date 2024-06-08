@@ -72,7 +72,7 @@ echo $paginas;
          </li>
         <?php
             for($i= 0;$i<=$paginas;$i++){
-               echo '<li class="page-item"><a class="page-link" href="#">'.($i+1).'</a></li>';
+               echo '<li class="page-item"><a class="page-link" href="crudtutor.php?pagina='.($i+1).'">'.($i+1).'</a></li>';
             }
         ?>
         <li class="page-item">
