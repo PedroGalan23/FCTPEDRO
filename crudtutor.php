@@ -67,11 +67,13 @@ echo $paginas;
 
     <nav aria-label="...">
       <ul class="pagination">
-         <li class="page-item disabled">
-            <a class="page-link">Anterior</a>
+         <li class="page-item ">
+            <a class="page-link" 
+            href="crudtutor.php?pagina=<?php echo $_GET['pagina']-1?>">Anterior</a>
          </li>
         <?php
             for($i= 0;$i<=$paginas;$i++){
+                //Metodo Get
                echo '<li class="page-item"><a class="page-link" href="crudtutor.php?pagina='.($i+1).'">'.($i+1).'</a></li>';
             }
         ?>
