@@ -67,9 +67,8 @@ echo $paginas;
 
     <nav aria-label="...">
       <ul class="pagination">
-         <li class="page-item ">
-            <a class="page-link" 
-            href="crudtutor.php?pagina=<?php echo $_GET['pagina']-1?>">Anterior</a>
+         <li class="page-item <?php echo $_GET['pagina']<=1 ? 'disabled':''?>">
+            <a class="page-link"href="crudtutor.php?pagina=<?php echo $_GET['pagina']-1?>">Anterior</a>
          </li>
         <?php
             for($i= 0;$i<=$paginas;$i++){
@@ -82,7 +81,7 @@ echo $paginas;
             }
             
         ?>
-        <li class="page-item">
+        <li class="page-item <?php echo $_GET['pagina']>=$paginas ? 'disabled':''?> ">
             <a class="page-link" href="crudtutor.php?pagina=<?php echo $_GET['pagina']+1?>">Siguiente</a>
         </li>
         </ul>
