@@ -71,6 +71,7 @@ echo $paginas;
         $result = $stmt->fetchAll();
         }
     ?>
+    <div class="Principal">
     <div>
         
         <form action="crudtutor.php" method="GET">
@@ -92,8 +93,8 @@ echo $paginas;
             <th>Numero_plazas</th>
             <th>Telefono</th>
             <th>Persona_contacto</th>
-            <th>YEE</th>
-            <th>BROO</th>
+            <th ></th>
+            <th></th>
     </tr>    
     <?php foreach( $result as $empresa ): ?>
         <?php echo "<tr>" ?>
@@ -134,5 +135,6 @@ echo $paginas;
         </li>
         </ul>
     </nav>
+    </div>
 </body>
 </html>
