@@ -46,6 +46,7 @@ echo $paginas;
         $inicio_empresas=($_GET['pagina']-1) * $articulosxPagina;
         $sql_empresas='SELECT * FROM empresa ORDER BY cif LIMIT :inicio,:nempresas';
         $stmt = $pdo->prepare($sql_empresas);
+        //Estudiar metodo bind param
         $stmt->bindParam(':inicio', $inicio_empresas, PDO::PARAM_INT);
         $stmt->bindParam(':nempresas', $articulosxPagina, PDO::PARAM_INT);
         $stmt->execute();
