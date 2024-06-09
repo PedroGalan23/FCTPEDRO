@@ -79,7 +79,6 @@ echo $paginas;
                 */
                 echo '<li class="page-item' . ($_GET['pagina'] == $i + 1 ? ' active' : '') . '"><a class="page-link" href="crudtutor.php?pagina=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
             }
-            
         ?>
         <li class="page-item <?php echo $_GET['pagina']>=$paginas ? 'disabled':''?> ">
             <a class="page-link" href="crudtutor.php?pagina=<?php echo $_GET['pagina']+1?>">Siguiente</a>
