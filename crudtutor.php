@@ -39,23 +39,42 @@ echo $paginas;
     <h1>Crud Empresa</h1>
     <?php
     //Duda redireccionar
-        if(!$_GET){
+    /*   
+    if(!$_GET){
         header('Location: crudtutor.php?pagina=1');
         }
-        $inicio_empresas=($_GET['pagina']-1) * $articulosxPagina;
+        */
+        //Importante
+        $nombre='%';
+        //Controlar el error de la página
+        $navVisible=true;
+        if(isset($_GET['enviar']) && !empty($_GET['busqueda'])){
+            $navVisible = !$navVisible;
+            $nombre=$_GET['busqueda'];
+            $sql='SELECT * FROM empresa WHERE nombre LIKE :nombre';
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':nombre', $nombre, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+        }else{
+        $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+        $inicio_empresas=($pagina - 1) * $articulosxPagina;
         $sql_empresas='SELECT * FROM empresa ORDER BY cif LIMIT :inicio,:nempresas';
         $stmt = $pdo->prepare($sql_empresas);
         //Estudiar metodo bind param
         $stmt->bindParam(':inicio', $inicio_empresas, PDO::PARAM_INT);
-        $stmt->bindParam(':nempresas', $articulosxPagina, PDO::PARAM_INT);
+        $stmt->bindParam(':nempresas', $articulosxPagina, PDO::PARAM_INT);        
         $stmt->execute();
-
         $result = $stmt->fetchAll();
-
+        }
     ?>
     <div>
-                <input type="text" name="busqueda" placeholder="Nombre">
-                <input type="submit" name="enviar" value="Buscar">
+        
+        <form action="crudtutor.php" method="GET">
+        <input type="hidden" name="pagina" value="<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '1'; ?>">
+        <input type="text" name="busqueda" placeholder="Nombre">
+        <input type="submit" name="enviar" value="Buscar">
+        </form>
     </div>
 
     <table>
@@ -70,7 +89,7 @@ echo $paginas;
             <th>Numero_plazas</th>
             <th>Telefono</th>
             <th>Persona_contacto</th>
-    </tr>
+    </tr>    
     <?php foreach( $result as $empresa ): ?>
         <?php echo "<tr>" ?>
         <?php echo "<td>".$empresa['nombre']."</td>" ?>
@@ -86,11 +105,12 @@ echo $paginas;
         <?php echo "</tr>" ?>
     <?php endforeach ?>
     </table>
+    
 
-    <nav aria-label="...">
+    <nav aria-label="..." <?php if(!$navVisible) echo 'style="display:none;"'; ?>>
       <ul class="pagination">
-         <li class="page-item <?php echo $_GET['pagina']<=1 ? 'disabled':''?>">
-            <a class="page-link"href="crudtutor.php?pagina=<?php echo $_GET['pagina']-1?>">Anterior</a>
+         <li class="page-item <?php echo $pagina<=1 ? 'disabled':''?>">
+            <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina?>">Anterior</a>
          </li>
         <?php
             for($i= 0;$i<=$paginas;$i++){
@@ -99,11 +119,11 @@ echo $paginas;
                 El metodo GET para active hace que si la pagina recogida por GET , es decir la página actual es igual a la página mostrada
                 entonces dará como resultado 'active' lo cual es una clase de
                 */
-                echo '<li class="page-item' . ($_GET['pagina'] == $i + 1 ? ' active' : '') . '"><a class="page-link" href="crudtutor.php?pagina=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
+                echo '<li class="page-item' . ($pagina== $i + 1 ? ' active' : '') . '"><a class="page-link" href="crudtutor.php?pagina=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
             }
         ?>
-        <li class="page-item <?php echo $_GET['pagina']>=$paginas ? 'disabled':''?> ">
-            <a class="page-link" href="crudtutor.php?pagina=<?php echo $_GET['pagina']+1?>">Siguiente</a>
+        <li class="page-item <?php echo $pagina>=$paginas ? 'disabled':''?> ">
+            <a class="page-link" href="crudtutor.php?pagina=<?php echo $pagina+1?>">Siguiente</a>
         </li>
         </ul>
     </nav>
