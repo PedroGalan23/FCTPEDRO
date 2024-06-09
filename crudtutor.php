@@ -36,6 +36,11 @@ echo $paginas;
 <body>
 
     <h1>Crud Empresa</h1>
+    <?php
+        if(!$_GET){
+        header('Location:crudtutor.php?pagina=1');
+        }
+    ?>
     <table>
     <tr>
             <th>Nombre</th>
