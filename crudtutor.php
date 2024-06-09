@@ -34,13 +34,26 @@ echo $paginas;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+    
 
     <h1>Crud Empresa</h1>
     <?php
+    //Duda redireccionar
         if(!$_GET){
-        header('Location:crudtutor.php?pagina=1');
+        header('Location: crudtutor.php?pagina=1');
         }
+
+        $inicio_empresas=($_GET['pagina']-1) * $articulosxPagina;
+        $sql_empresas='SELECT * FROM empresa ORDER BY cif LIMIT :inicio,:nempresas';
+        $stmt = $pdo->prepare($sql_empresas);
+        $stmt->bindParam(':inicio', $inicio_empresas, PDO::PARAM_INT);
+        $stmt->bindParam(':nempresas', $articulosxPagina, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
     ?>
+
     <table>
     <tr>
             <th>Nombre</th>
