@@ -42,7 +42,6 @@ echo $paginas;
         if(!$_GET){
         header('Location: crudtutor.php?pagina=1');
         }
-
         $inicio_empresas=($_GET['pagina']-1) * $articulosxPagina;
         $sql_empresas='SELECT * FROM empresa ORDER BY cif LIMIT :inicio,:nempresas';
         $stmt = $pdo->prepare($sql_empresas);
@@ -54,6 +53,10 @@ echo $paginas;
         $result = $stmt->fetchAll();
 
     ?>
+    <div>
+                <input type="text" name="busqueda" placeholder="Nombre">
+                <input type="submit" name="enviar" value="Buscar">
+    </div>
 
     <table>
     <tr>
