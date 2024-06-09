@@ -32,6 +32,8 @@ echo $paginas;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
 </head>
 <body>
     
@@ -89,6 +91,8 @@ echo $paginas;
             <th>Numero_plazas</th>
             <th>Telefono</th>
             <th>Persona_contacto</th>
+            <th>YEE</th>
+            <th>BROO</th>
     </tr>    
     <?php foreach( $result as $empresa ): ?>
         <?php echo "<tr>" ?>
@@ -102,6 +106,8 @@ echo $paginas;
         <?php echo "<td>".$empresa['numero_plazas']."</td>" ?>
         <?php echo "<td>".$empresa['telefono']."</td>" ?>
         <?php echo "<td>".$empresa['persona_contacto']."</td>" ?>
+        <?php echo '<td><a href="#"><i class="bi bi-pen"></i></a></td>'; ?>
+        <?php echo '<td><a href="#"><i class="bi bi-trash"></i></a></td>'; ?>
         <?php echo "</tr>" ?>
     <?php endforeach ?>
     </table>
@@ -110,7 +116,7 @@ echo $paginas;
     <nav aria-label="..." <?php if(!$navVisible) echo 'style="display:none;"'; ?>>
       <ul class="pagination">
          <li class="page-item <?php echo $pagina<=1 ? 'disabled':''?>">
-            <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina?>">Anterior</a>
+            <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina-1?>">Anterior</a>
          </li>
         <?php
             for($i= 0;$i<=$paginas;$i++){
