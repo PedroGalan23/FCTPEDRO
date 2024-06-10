@@ -1,3 +1,45 @@
+<?php
+  $host = 'localhost';
+  $dbname = 'control_fct';
+  $user = 'root';
+  $pass = '';
+  if(isset($_POST['crear'])){
+    if(empty($_POST['cif'])){
+        echo 'El campo del identificador esta vacío';
+    }else{
+        $nombre = $_POST["nombre"] ?? null; 
+        $cif = $_POST["cif"]; 
+        $nombre_fiscal = $_POST["nombre_fiscal"] ?? null; 
+        $email = $_POST["email"] ?? null; 
+        $direccion = $_POST["direccion"] ?? null; 
+        $localidad = $_POST["localidad"] ?? null; 
+        $provincia = $_POST["provincia"] ?? null; 
+        $numero_plazas = $_POST["numero_plazas"] ?? null; 
+        $telefono = $_POST["telefono"] ?? null; 
+        $persona_contacto = $_POST["persona_contacto"] ?? null; 
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+
+    }
+  }
+
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +84,7 @@
         <label for="persona_contacto">Persona de Contacto:</label>
         <input type="text" name="persona_contacto">
 
-        <input type="submit" value="Crear">
+        <input type="submit" name="crear" value="Crear">
     </form>
 
 
