@@ -69,18 +69,19 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
         $result = $stmt->fetchAll();
         }
     ?>
+    
     <div class="principal">
-    <div>
-        
+    <div class="secundario">
+        <a href="crearempresa.php"><button>Crear Empresa</button></a>
         <form action="crudtutor.php" method="GET">
             <input type="hidden" name="pagina" value="<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '1'; ?>">
+            <label for="busqueda">Filtro:</label>
             <input type="text" name="busqueda" placeholder="Nombre">
             <input type="submit" name="enviar" value="Buscar">
         </form>
         
 
     </div>
-
     <table>
     <tr>
             <th>Nombre</th>
@@ -113,7 +114,6 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
         <?php echo "</tr>" ?>
     <?php endforeach ?>
     </table>
-    
 
     <nav aria-label="..." <?php if(!$navVisible) echo 'style="display:none;"'; ?>>
       <ul class="pagination">
