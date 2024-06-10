@@ -46,7 +46,7 @@
          }
          }catch(PDOException $e){
             echo "Se ha producido un error al intentar conectar el servidor SQL";
-            }
+         }
 
     ?>
     </form>
