@@ -20,8 +20,6 @@ $numeroEmpresas=$stmt->rowCount();
 //echo $numeroEmpresas;
 //numero de paginas totales,usamos ceil para redondear
 $paginas=ceil($numeroEmpresas/$articulosxPagina);
-echo $paginas;
-
 ?>
 
 
@@ -71,7 +69,7 @@ echo $paginas;
         $result = $stmt->fetchAll();
         }
     ?>
-    <div class="Principal">
+    <div class="principal">
     <div>
         
         <form action="crudtutor.php" method="GET">
