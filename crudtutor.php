@@ -14,7 +14,7 @@ $result = $stmt->fetchAll();
 //Para comprobar que todo esté correcto usaremos var_dump que mostrará todos los elementos del array
 //var_dump($result);
 //El array mostrado en con var_dump vamos a mostrarlo en la tabla
-$articulosxPagina=6;
+$articulosxPagina=8;
 //Contar empresas de nuestra bd utilizando el metodo rowCount que cuenta las filas de un arrray
 $numeroEmpresas=$stmt->rowCount();
 //echo $numeroEmpresas;
@@ -75,10 +75,12 @@ echo $paginas;
     <div>
         
         <form action="crudtutor.php" method="GET">
-        <input type="hidden" name="pagina" value="<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '1'; ?>">
-        <input type="text" name="busqueda" placeholder="Nombre">
-        <input type="submit" name="enviar" value="Buscar">
+            <input type="hidden" name="pagina" value="<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '1'; ?>">
+            <input type="text" name="busqueda" placeholder="Nombre">
+            <input type="submit" name="enviar" value="Buscar">
         </form>
+        
+
     </div>
 
     <table>
