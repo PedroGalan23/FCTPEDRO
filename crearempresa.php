@@ -3,12 +3,7 @@
   $dbname = 'control_fct';
   $user = 'root';
   $pass = '';
-  if(isset($_POST['crear'])){
-    if(empty($_POST['cif'])){
-        echo 'El campo del identificador esta vacío';
-    }else{
         $nombre = $_POST["nombre"] ?? null; 
-        $cif = $_POST["cif"]; 
         $nombre_fiscal = $_POST["nombre_fiscal"] ?? null; 
         $email = $_POST["email"] ?? null; 
         $direccion = $_POST["direccion"] ?? null; 
@@ -17,15 +12,36 @@
         $numero_plazas = $_POST["numero_plazas"] ?? null; 
         $telefono = $_POST["telefono"] ?? null; 
         $persona_contacto = $_POST["persona_contacto"] ?? null; 
+  try {
+  if(isset($_POST['crear'])){
+    if(empty($_POST['cif'])){
+        echo 'El campo del identificador esta vacío';
+    }else{
+        $cif = $_POST["cif"]; 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql="INSERT INTO empresa (nombre, cif, nombre_fiscal, email, direccion, localidad, provincia, numero_plazas, telefono, persona_contacto)
+        SELECT '$nombre', '$cif', '$nombre_fiscal', '$email', '$direccion', '$localidad', '$provincia', '$numero_plazas', '$telefono', '$persona_contacto'
+        FROM dual
+        WHERE NOT EXISTS (
+            SELECT * FROM empresa WHERE nombre = '$nombre'
+        )";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        if ($stmt->rowCount()> 0) {
+            echo "<script>alert('La empresa [$nombre] se creó correctamente'); location.href='crudtutor.php';</script>";
+        }else{
+            echo "<script>alert('La empresa [$nombre] no se creó correctamente'); location.href='crearempresa.php';</script>";
+        }
 
 
 
     }
   }
 
-
+  } catch(PDOException $e) {
+    echo "Ha ocurrido un error en la conexion";
+    }
 
 
 
