@@ -135,7 +135,10 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
     </table>
 
     <nav aria-label="..." <?php if(!$navVisible) echo 'style="display:none;"'; ?>>
-      <ul class="pagination">
+      <ul class="pagination" >
+        <li class="page-item <?php echo $pagina<=1 ? 'disabled':''?>" >
+            <a class="page-link" href="crudtutor.php?pagina=1"><<</a>
+        </li>
          <li class="page-item <?php echo $pagina<=1 ? 'disabled':''?>">
             <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina-1?>">Anterior</a>
          </li>
