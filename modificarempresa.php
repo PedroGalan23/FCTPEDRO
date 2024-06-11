@@ -25,6 +25,15 @@
 
     if(isset($_POST['modificar'])){
         //Lo que pasará cuando enviemos el formulario editado
+        $nombre = $_POST["nombre"] ?? $nombre; 
+        $nombre_fiscal = $_POST["nombre_fiscal"] ?? $nombre_fiscal; 
+        $email = $_POST["email"] ?? $email; 
+        $direccion = $_POST["direccion"] ?? $direccion; 
+        $localidad = $_POST["localidad"] ?? $localidad; 
+        $provincia = $_POST["provincia"] ?? $provincia; 
+        $numero_plazas = $_POST["numero_plazas"] ?? $numero_plazas; 
+        $telefono = $_POST["telefono"] ?? $telefono; 
+        $persona_contacto = $_POST["persona_contacto"] ?? $persona_contacto; 
     }else{
         // Lo que pasará cuando no se presione, es decir mostrar información actual de la empresa seleccionada
         $cif = $_GET['cif'];
