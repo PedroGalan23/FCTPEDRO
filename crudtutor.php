@@ -32,6 +32,13 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="crudtutor.css">
+    <!---Función JAVASCRIPT para confirmar la eliminación de una empresa-->
+    <script type="text/JAVASCRIPT">
+        function confirmar() {
+            return confirm('Estas seguro?, la empresa se eliminará');
+        }
+    </script>
+    
 
 </head>
 <body>
@@ -110,7 +117,7 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
         <?php echo "<td>".$empresa['telefono']."</td>" ?>
         <?php echo "<td>".$empresa['persona_contacto']."</td>" ?>
         <?php echo '<td><a href="modificarempresa.php?cif=' . $empresa["cif"] . '"><i class="bi bi-pen"></i></a></td>'; ?>
-        <?php echo '<td><a href="eliminar.php?cif='. $empresa["cif"].'"><i class="bi bi-trash"></i></a></td>'; ?>
+        <?php echo '<td><a href="eliminar.php?cif='. $empresa["cif"].'" onclick="return confirmar()"><i class="bi bi-trash"></i></a></td>'; ?>
         <?php echo "</tr>" ?>
     <?php endforeach ?>
     </table>
