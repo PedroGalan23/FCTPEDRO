@@ -23,18 +23,7 @@
         echo "Ha ocurrido un error en la conexión";
     }
 
-    if(isset($_POST['modificar'])){
-        //Lo que pasará cuando enviemos el formulario editado
-        $nombre = $_POST["nombre"] ?? $nombre; 
-        $nombre_fiscal = $_POST["nombre_fiscal"] ?? $nombre_fiscal; 
-        $email = $_POST["email"] ?? $email; 
-        $direccion = $_POST["direccion"] ?? $direccion; 
-        $localidad = $_POST["localidad"] ?? $localidad; 
-        $provincia = $_POST["provincia"] ?? $provincia; 
-        $numero_plazas = $_POST["numero_plazas"] ?? $numero_plazas; 
-        $telefono = $_POST["telefono"] ?? $telefono; 
-        $persona_contacto = $_POST["persona_contacto"] ?? $persona_contacto; 
-    }else{
+    if(!isset($_POST['modificar'])){
         // Lo que pasará cuando no se presione, es decir mostrar información actual de la empresa seleccionada
         $cif = $_GET['cif'];
         $sql = "SELECT * FROM empresa WHERE cif = :cif";
@@ -51,15 +40,46 @@
         $numero_plazas = $empresa['numero_plazas'] ?? null;
         $telefono = $empresa['telefono'] ?? null;
         $persona_contacto = $empresa['persona_contacto'] ?? null;
+
+
+
+    }else{
+        //Lo que pasará cuando enviemos el formulario editado
+        $cif = $_POST["cif"] ?? null;
+        $nombre= $_POST["nombre"] ?? null;
+        $nombre_fiscal = $_POST["nombre_fiscal"] ?? null; 
+        $email= $_POST["email"] ?? null;
+        $direccion = $_POST["direccion"] ?? null; 
+        $localidad = $_POST["localidad"] ?? null; 
+        $provincia = $_POST["provincia"] ?? null; 
+        $numero_plazas = $_POST["numero_plazas"] ?? null; 
+        $telefono = $_POST["telefono"] ?? null; 
+        $persona_contacto = $_POST["persona_contacto"] ?? null; 
+        $sql= "UPDATE empresa SET nombre_fiscal=:nombre_fiscal, email=:email, direccion=:direccion, localidad=:localidad, provincia=:provincia, numero_plazas=:numero_plazas, telefono=:telefono, persona_contacto=:persona_contacto WHERE nombre=:nombre";
+        $stmt = $pdo->prepare($sql);
+        if ( $stmt->execute([
+            ':nombre_fiscal' => $nombre_fiscal,
+            ':email' => $email,
+            ':direccion' => $direccion,
+            ':localidad' => $localidad,
+            ':provincia' => $provincia,
+            ':numero_plazas' => $numero_plazas,
+            ':telefono' => $telefono,
+            ':persona_contacto' => $persona_contacto,
+            ':nombre'=> $nombre
+        ])) {
+            echo "<script>alert('La empresa [$nombre] con cif [$cif] se modificó correctamente'); location.href='crudtutor.php';</script>";
+        } else {
+            echo "<script>alert('La empresa [$nombre] con cif [$cif] no se modificó correctamente'); location.href='crudtutor.php';</script>";
+        }
+
     }
-    
-    
     ?>
 
 
 
     <h1>Modificar Empresa</h1>
-    <form action="crearempresa.php" method="POST">
+    <form action="modificarempresa.php" method="POST">
         <a href="crudtutor.php"><i class="bi bi-x-lg bi-3x"></i></a>
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" value="<?php echo $nombre ?>" readonly>
