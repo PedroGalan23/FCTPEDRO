@@ -18,6 +18,4 @@
         echo "<script>alert('La empresa no se eliminó correctamente'); location.href='crudtutor.php';</script>";
     } 
 
-
-
 ?>

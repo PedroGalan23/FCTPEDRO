@@ -6,9 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
-
     <link rel="stylesheet" type="text/css" href="crear.css">
-    <title>Document</title>
+    <title>EDIT</title>
 </head>
 <body>
     <?php 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" type="text/css" href="crear.css">
-    <title>Document</title>
+    <title>CREAR</title>
 </head>
 <body>
     <h1>Crear nueva Empresa</h1>
