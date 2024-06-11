@@ -53,34 +53,34 @@
     <form action="crearempresa.php" method="POST">
         <a href="crudtutor.php"><i class="bi bi-x-lg bi-3x"></i></a>
         <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre">
-        
+        <input type="text" name="nombre" value="<?php echo $nombre ?>" readonly>
+
         <label for="cif">Cif:</label>
-        <input type="text" name="cif">
+        <input type="text" name="cif" value="<?php echo $cif ?>" readonly>
         
         <label for="nombre_fiscal">Nombre Fiscal:</label>
-        <input type="text" name="nombre_fiscal">
+        <input type="text" name="nombre_fiscal" value="<?php echo $nombre_fiscal ?>">
         
         <label for="email">Email:</label>
-        <input type="text" name="email">
+        <input type="text" name="email" value="<?php echo $email ?>">
         
         <label for="direccion">Dirección:</label>
-        <input type="text" name="direccion">
+        <input type="text" name="direccion" value="<?php echo $direccion ?>">
         
         <label for="localidad">Localidad:</label>
-        <input type="text" name="localidad">
+        <input type="text" name="localidad" value="<?php echo $localidad ?>">
         
         <label for="provincia">Provincia:</label>
-        <input type="text" name="provincia">
+        <input type="text" name="provincia" value="<?php echo $provincia ?>">
         
         <label for="numero_plazas">Numero de Plazas:</label>
-        <input type="text" name="numero_plazas">
+        <input type="text" name="numero_plazas" value="<?php echo $numero_plazas ?>">
         
         <label for="telefono">Telefono:</label>
-        <input type="text" name="telefono">
+        <input type="text" name="telefono" value="<?php echo $telefono ?>">
 
         <label for="persona_contacto">Persona de Contacto:</label>
-        <input type="text" name="persona_contacto">
+        <input type="text" name="persona_contacto" value="<?php echo $persona_contacto ?>">
 
         <label for="modificar"></label>
         <input type="submit" name="modificar" value="Guardar Cambios">
