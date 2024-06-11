@@ -139,16 +139,9 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
          <li class="page-item <?php echo $pagina<=1 ? 'disabled':''?>">
             <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina-1?>">Anterior</a>
          </li>
-        <?php
-            for($i= 0;$i<=$paginas;){
-                /*
-                Utilizando el
-                El metodo GET para active hace que si la pagina recogida por GET , es decir la página actual es igual a la página mostrada
-                entonces dará como resultado 'active' lo cual es una clase de
-                */
-                echo '<li class="page-item' . ($pagina== $i + 1 ? ' active' : '') . '"><a class="page-link" href="crudtutor.php?pagina=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
-            }
-        ?>
+         <li class="page-item active">
+            <a class="page-link" href="#"><?php echo $pagina?></a>
+         </li>
         <li class="page-item <?php echo $pagina>=$paginas ? 'disabled':''?> ">
             <a class="page-link" href="crudtutor.php?pagina=<?php echo $pagina+1?>">Siguiente</a>
         </li>
