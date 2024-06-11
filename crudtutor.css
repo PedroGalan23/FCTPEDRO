@@ -28,4 +28,10 @@ h1{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 10px;
+}
+.general{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
 }

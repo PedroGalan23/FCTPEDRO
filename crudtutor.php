@@ -14,7 +14,7 @@ $result = $stmt->fetchAll();
 //Para comprobar que todo esté correcto usaremos var_dump que mostrará todos los elementos del array
 //var_dump($result);
 //El array mostrado en con var_dump vamos a mostrarlo en la tabla
-$articulosxPagina=8;
+$articulosxPagina = isset($_GET['num_articulos']) ? intval($_GET['num_articulos']) : 10; 
 //Contar empresas de nuestra bd utilizando el metodo rowCount que cuenta las filas de un arrray
 $numeroEmpresas=$stmt->rowCount();
 //echo $numeroEmpresas;
@@ -43,8 +43,11 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
 </head>
 <body>
     
-
-    <h1>Crud Empresa</h1>
+        <div class="principal">
+        <h1>Crud Empresa</h1>
+        <a href="login.php"><button>Cerrar Sesion</button></a>
+        </div>
+        <br>
     <?php
     //Duda redireccionar
     /*   
@@ -85,6 +88,15 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
             <label for="busqueda">Filtro:</label>
             <input type="text" name="busqueda" placeholder="Nombre">
             <input type="submit" name="enviar" value="Buscar">
+        </form>
+        <form action="crudtutor.php" method="GET">
+            <label for="num_articulos">Artículos por Página:</label>
+            <select name="num_articulos" id="num_articulos">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+        </select>
+        <input type="submit" value="Actualizar">
         </form>
         
 
