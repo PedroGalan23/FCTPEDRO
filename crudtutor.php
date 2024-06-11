@@ -78,7 +78,7 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
             <label for="busqueda">Filtro:</label>
             <input type="text" name="busqueda" placeholder="Nombre">
             <input type="submit" name="enviar" value="Buscar">
-        </form>
+        </form>3
         
 
     </div>
