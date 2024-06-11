@@ -26,10 +26,24 @@
     if(isset($_POST['modificar'])){
         //Lo que pasará cuando enviemos el formulario editado
     }else{
-        //Lo que pasará cuando no se presione, es decir mostrar información actual de la empresa seleccionada
-        $cif=$_GET['cif'];
-        //echo $cif; verificado
+        // Lo que pasará cuando no se presione, es decir mostrar información actual de la empresa seleccionada
+        $cif = $_GET['cif'];
+        $sql = "SELECT * FROM empresa WHERE cif = :cif";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['cif' => $cif]);
+        $empresa = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        $nombre = $empresa['nombre'] ?? null;
+        $nombre_fiscal = $empresa['nombre_fiscal'] ?? null;
+        $email = $empresa['email'] ?? null;
+        $direccion = $empresa['direccion'] ?? null;
+        $localidad = $empresa['localidad'] ?? null;
+        $provincia = $empresa['provincia'] ?? null;
+        $numero_plazas = $empresa['numero_plazas'] ?? null;
+        $telefono = $empresa['telefono'] ?? null;
+        $persona_contacto = $empresa['persona_contacto'] ?? null;
     }
+    
     
     ?>
 

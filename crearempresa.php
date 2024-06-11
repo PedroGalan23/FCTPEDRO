@@ -64,7 +64,7 @@
     if(empty($_POST['nombre'])){
         echo '<div class="error"> El campo del identificador esta vacío</div>';
     }else{
-        $cif = $_POST["cif"]; 
+        $cif = $_POST["cif"] ?? null; 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql="INSERT INTO empresa (nombre, cif, nombre_fiscal, email, direccion, localidad, provincia, numero_plazas, telefono, persona_contacto)
