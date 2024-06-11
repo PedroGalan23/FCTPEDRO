@@ -12,16 +12,24 @@
 </head>
 <body>
     <?php 
-    
+     $host='localhost';
+     $dbname='control_fct';
+     $user='root';
+     $pass='';
+    try{
+        $pdo=new PDO("mysql:host=$host;dbname=$dbname;charset=utf8",$user,$pass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    }catch(PDOException $e){
+        echo "Ha ocurrido un error en la conexión";
+    }
+
     if(isset($_POST['modificar'])){
         //Lo que pasará cuando enviemos el formulario editado
     }else{
         //Lo que pasará cuando no se presione, es decir mostrar información actual de la empresa seleccionada
+        $cif=$_GET['cif'];
+        //echo $cif; verificado
     }
-    
-    
-    
-    
     
     ?>
 

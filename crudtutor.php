@@ -78,7 +78,7 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
             <label for="busqueda">Filtro:</label>
             <input type="text" name="busqueda" placeholder="Nombre">
             <input type="submit" name="enviar" value="Buscar">
-        </form>3
+        </form>
         
 
     </div>
@@ -109,7 +109,7 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
         <?php echo "<td>".$empresa['numero_plazas']."</td>" ?>
         <?php echo "<td>".$empresa['telefono']."</td>" ?>
         <?php echo "<td>".$empresa['persona_contacto']."</td>" ?>
-        <?php echo '<td><a href="editar.php?id=' . $empresa["id"] . '"><i class="bi bi-pen"></i></a></td>'; ?>
+        <?php echo '<td><a href="modificarempresa.php?cif=' . $empresa["cif"] . '"><i class="bi bi-pen"></i></a></td>'; ?>
         <?php echo '<td><a href="#"><i class="bi bi-trash"></i></a></td>'; ?>
         <?php echo "</tr>" ?>
     <?php endforeach ?>
