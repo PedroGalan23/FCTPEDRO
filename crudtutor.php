@@ -140,7 +140,7 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
             <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina-1?>">Anterior</a>
          </li>
         <?php
-            for($i= 0;$i<=$paginas;$i++){
+            for($i= 0;$i<=$paginas;){
                 /*
                 Utilizando el
                 El metodo GET para active hace que si la pagina recogida por GET , es decir la página actual es igual a la página mostrada
