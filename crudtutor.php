@@ -14,12 +14,12 @@ $result = $stmt->fetchAll();
 //Para comprobar que todo esté correcto usaremos var_dump que mostrará todos los elementos del array
 //var_dump($result);
 //El array mostrado en con var_dump vamos a mostrarlo en la tabla
-$articulosxPagina = isset($_GET['num_articulos']) ? intval($_GET['num_articulos']) : 10; 
+$empresasxPagina = isset($_GET['num_articulos']) ? intval($_GET['num_articulos']) : 10; 
 //Contar empresas de nuestra bd utilizando el metodo rowCount que cuenta las filas de un arrray
 $numeroEmpresas=$stmt->rowCount();
 //echo $numeroEmpresas;
 //numero de paginas totales,usamos ceil para redondear
-$paginas=ceil($numeroEmpresas/$articulosxPagina);
+$paginas=ceil($numeroEmpresas/$empresasxPagina);
 ?>
 
 
@@ -35,7 +35,7 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
     <!---Función JAVASCRIPT para confirmar la eliminación de una empresa-->
     <script type="text/JAVASCRIPT">
         function confirmar() {
-            return confirm('Estas seguro?, la empresa se eliminará');
+            return confirm('¿Estas seguro?, la empresa se eliminará');
         }
     </script>
     
@@ -69,12 +69,12 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
             $result = $stmt->fetchAll();
         }else{
         $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-        $inicio_empresas=($pagina - 1) * $articulosxPagina;
+        $inicio_empresas=($pagina - 1) * $empresasxPagina;
         $sql_empresas='SELECT * FROM empresa ORDER BY cif LIMIT :inicio,:nempresas';
         $stmt = $pdo->prepare($sql_empresas);
         //Estudiar metodo bind param
         $stmt->bindParam(':inicio', $inicio_empresas, PDO::PARAM_INT);
-        $stmt->bindParam(':nempresas', $articulosxPagina, PDO::PARAM_INT);        
+        $stmt->bindParam(':nempresas', $empresasxPagina, PDO::PARAM_INT);        
         $stmt->execute();
         $result = $stmt->fetchAll();
         }
@@ -140,13 +140,13 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
             <a class="page-link" href="crudtutor.php?pagina=1"><<</a>
         </li>
          <li class="page-item <?php echo $pagina<=1 ? 'disabled':''?>">
-            <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina-1?>">Anterior</a>
+            <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina-1?>"><</a>
          </li>
          <li class="page-item active">
             <a class="page-link" href="#"><?php echo $pagina?></a>
          </li>
         <li class="page-item <?php echo $pagina>=$paginas ? 'disabled':''?> ">
-            <a class="page-link" href="crudtutor.php?pagina=<?php echo $pagina+1?>">Siguiente</a>
+            <a class="page-link" href="crudtutor.php?pagina=<?php echo $pagina+1?>">></a>
         </li>
         <li class="page-item <?php echo $pagina>=$paginas ? 'disabled':''?> ">
             <a class="page-link" href="crudtutor.php?pagina=<?php echo $paginas ?>">>></a>
