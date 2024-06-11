@@ -148,6 +148,9 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
         <li class="page-item <?php echo $pagina>=$paginas ? 'disabled':''?> ">
             <a class="page-link" href="crudtutor.php?pagina=<?php echo $pagina+1?>">Siguiente</a>
         </li>
+        <li class="page-item <?php echo $pagina>=$paginas ? 'disabled':''?> ">
+            <a class="page-link" href="crudtutor.php?pagina=<?php echo $paginas ?>">>></a>
+        </li>
         </ul>
     </nav>
     </div>
