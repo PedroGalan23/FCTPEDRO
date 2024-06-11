@@ -110,7 +110,7 @@ $paginas=ceil($numeroEmpresas/$articulosxPagina);
         <?php echo "<td>".$empresa['telefono']."</td>" ?>
         <?php echo "<td>".$empresa['persona_contacto']."</td>" ?>
         <?php echo '<td><a href="modificarempresa.php?cif=' . $empresa["cif"] . '"><i class="bi bi-pen"></i></a></td>'; ?>
-        <?php echo '<td><a href="#"><i class="bi bi-trash"></i></a></td>'; ?>
+        <?php echo '<td><a href="eliminar.php?cif='. $empresa["cif"].'"><i class="bi bi-trash"></i></a></td>'; ?>
         <?php echo "</tr>" ?>
     <?php endforeach ?>
     </table>
