@@ -41,6 +41,8 @@
                 $stmt_tutor->execute([$usuario,$password]);
                 if($stmt_tutor->rowCount()> 0){
                     header("location:crudtutor.php");
+                }else{
+                    echo '<div class="bad">Las credenciales no son válidas</div>';
                 }
             }
          }
