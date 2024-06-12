@@ -1,6 +1,8 @@
 <?php
 try {
     $pdo=new PDO('mysql:host=localhost;dbname=control_fct','root','');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
   //  echo 'conexión completada con exito';
 } catch (PDOException $e) {
     echo "Ha ocurrido un error en la conexión a la bd";
@@ -14,7 +16,7 @@ $result = $stmt->fetchAll();
 //Para comprobar que todo esté correcto usaremos var_dump que mostrará todos los elementos del array
 //var_dump($result);
 //El array mostrado en con var_dump vamos a mostrarlo en la tabla
-$empresasxPagina = isset($_GET['num_articulos']) ? intval($_GET['num_articulos']) : 10; 
+$empresasxPagina = isset($_GET['num_articulos']) ? $_GET['num_articulos'] : 10; 
 //Contar empresas de nuestra bd utilizando el metodo rowCount que cuenta las filas de un arrray
 $numeroEmpresas=$stmt->rowCount();
 //echo $numeroEmpresas;
@@ -35,6 +37,7 @@ $paginas=ceil($numeroEmpresas/$empresasxPagina);
     <!---Función JAVASCRIPT para confirmar la eliminación de una empresa-->
     <script type="text/JAVASCRIPT">
         function confirmar() {
+            //La función confirm se utiliza para mostrar un mensaje de aceptar o cancelar, devolverá el valor segun la elección
             return confirm('¿Estas seguro?, la empresa se eliminará');
         }
     </script>
@@ -46,16 +49,8 @@ $paginas=ceil($numeroEmpresas/$empresasxPagina);
         <div class="principal">
         <h1>Crud Empresa</h1>
         <a href="login.php"><button>Cerrar Sesion</button></a>
-        </div>
-        <br>
+        </div>                                                                                                                                                                                          <br>
     <?php
-    //Duda redireccionar
-    /*   
-    if(!$_GET){
-        header('Location: crudtutor.php?pagina=1');
-        }
-        */
-        //Importante
         $nombre='%';
         //Controlar el error de la página
         $navVisible=true;
@@ -64,18 +59,23 @@ $paginas=ceil($numeroEmpresas/$empresasxPagina);
             $nombre=$_GET['busqueda'];
             $sql='SELECT * FROM empresa WHERE nombre LIKE :nombre';
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':nombre', $nombre, PDO::PARAM_STR);
-            $stmt->execute();
+            $stmt->execute([':nombre'=>$nombre]);
             $result = $stmt->fetchAll();
         }else{
         $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
         $inicio_empresas=($pagina - 1) * $empresasxPagina;
         $sql_empresas='SELECT * FROM empresa ORDER BY cif LIMIT :inicio,:nempresas';
         $stmt = $pdo->prepare($sql_empresas);
-        //Estudiar metodo bind param
+        //Evitar inyección .alternativa bind param o ponerlo directamente en la consulta
+        /*
+        $stmt->execute([
+            ':inicio'=>$inicio_empresas,
+            ':nempresas'=>$empresasxPagina]);
+            */
+        //bindParam 
         $stmt->bindParam(':inicio', $inicio_empresas, PDO::PARAM_INT);
-        $stmt->bindParam(':nempresas', $empresasxPagina, PDO::PARAM_INT);        
-        $stmt->execute();
+        $stmt->bindParam(':nempresas', $empresasxPagina, PDO::PARAM_INT);
+        $stmt->execute(); 
         $result = $stmt->fetchAll();
         }
     ?>
@@ -84,17 +84,16 @@ $paginas=ceil($numeroEmpresas/$empresasxPagina);
     <div class="secundario">
         <a href="crearempresa.php"><button>Crear Empresa</button></a>
         <form action="crudtutor.php" method="GET">
-            <input type="hidden" name="pagina" value="<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : '1'; ?>">
             <label for="busqueda">Filtro:</label>
             <input type="text" name="busqueda" placeholder="Nombre">
             <input type="submit" name="enviar" value="Buscar">
         </form>
         <form action="crudtutor.php" method="GET">
             <label for="num_articulos">Artículos por Página:</label>
-            <select name="num_articulos" id="num_articulos">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
+            <select name="num_articulos" >
+            <option value="5"<?php if($empresasxPagina==5){echo 'selected';}?>>5</option>
+            <option value="10" <?php if($empresasxPagina==10){echo 'selected';}?>>10</option>
+            <option value="15" <?php if($empresasxPagina==15){echo 'selected';}?>>15</option>
         </select>
         <input type="submit" value="Actualizar">
         </form>
