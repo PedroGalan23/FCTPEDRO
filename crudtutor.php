@@ -140,19 +140,19 @@ $paginas=ceil($numeroEmpresas/$empresasxPagina);
     <nav aria-label="..." <?php if(!$navVisible) echo 'style="display:none;"'; ?>>
       <ul class="pagination" >
         <li class="page-item <?php echo $pagina<=1 ? 'disabled':''?>" >
-            <a class="page-link" href="crudtutor.php?pagina=1"><<</a>
+            <a class="page-link" href="crudtutor.php?pagina=1 &num_articulos=<?php echo $empresasxPagina; ?>"><<</a>
         </li>
          <li class="page-item <?php echo $pagina<=1 ? 'disabled':''?>">
-            <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina-1?>"><</a>
+            <a class="page-link"href="crudtutor.php?pagina=<?php echo $pagina-1?> &num_articulos=<?php echo $empresasxPagina; ?>"><</a>
          </li>
          <li class="page-item active">
             <a class="page-link" href="#"><?php echo $pagina?></a>
          </li>
         <li class="page-item <?php echo $pagina>=$paginas ? 'disabled':''?> ">
-            <a class="page-link" href="crudtutor.php?pagina=<?php echo $pagina+1?>">></a>
+            <a class="page-link" href="crudtutor.php?pagina=<?php echo $pagina+1?> &num_articulos=<?php echo $empresasxPagina; ?> ">></a>
         </li>
         <li class="page-item <?php echo $pagina>=$paginas ? 'disabled':''?> ">
-            <a class="page-link" href="crudtutor.php?pagina=<?php echo $paginas ?>">>></a>
+            <a class="page-link" href="crudtutor.php?pagina=<?php echo $paginas ?>&num_articulos=<?php echo $empresasxPagina; ?>">>></a>
         </li>
         </ul>
     </nav>
