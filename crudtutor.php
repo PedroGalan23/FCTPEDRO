@@ -16,6 +16,9 @@ $result = $stmt->fetchAll();
 //Para comprobar que todo esté correcto usaremos var_dump que mostrará todos los elementos del array
 //var_dump($result);
 //El array mostrado en con var_dump vamos a mostrarlo en la tabla
+/*
+si el valor ha sido enviar mediante un formulario por el metodo get y por lo tanto existe su valor, se recoge en la variable
+*/
 $empresasxPagina = isset($_GET['num_articulos']) ? $_GET['num_articulos'] : 10; 
 //Contar empresas de nuestra bd utilizando el metodo rowCount que cuenta las filas de un arrray
 $numeroEmpresas=$stmt->rowCount();
@@ -91,11 +94,12 @@ $paginas=ceil($numeroEmpresas/$empresasxPagina);
         <form action="crudtutor.php" method="GET">
             <label for="num_articulos">Artículos por Página:</label>
             <select name="num_articulos" >
-            <option value="5"<?php if($empresasxPagina==5){echo 'selected';}?>>5</option>
-            <option value="10" <?php if($empresasxPagina==10){echo 'selected';}?>>10</option>
-            <option value="15" <?php if($empresasxPagina==15){echo 'selected';}?>>15</option>
-        </select>
-        <input type="submit" value="Actualizar">
+                <option value="5"<?php if($empresasxPagina==5){echo 'selected';}?>>5</option>
+                <option value="10" <?php if($empresasxPagina==10){echo 'selected';}?>>10</option>
+                <option value="15" <?php if($empresasxPagina==15){echo 'selected';}?>>15</option>
+            </select>
+            <input type="hidden" name="pagina" value="<?php echo "$pagina" ?>">
+            <input type="submit" value="Actualizar">
         </form>
         
 
