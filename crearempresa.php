@@ -46,10 +46,10 @@
 
         <input type="submit" name="crear" value="Crear">
         <?php
-  $host = 'localhost';
-  $dbname = 'control_fct';
-  $user = 'root';
-  $pass = '';
+            $host = 'localhost';
+            $dbname = 'control_fct';
+            $user = 'root';
+            $pass = '';
         $nombre = $_POST["nombre"] ?? null; 
         $nombre_fiscal = $_POST["nombre_fiscal"] ?? null; 
         $email = $_POST["email"] ?? null; 
@@ -59,12 +59,12 @@
         $numero_plazas = $_POST["numero_plazas"] ?? null; 
         $telefono = $_POST["telefono"] ?? null; 
         $persona_contacto = $_POST["persona_contacto"] ?? null; 
+        $cif = $_POST["cif"] ?? null; 
   try {
   if(isset($_POST['crear'])){
     if(empty($_POST['nombre'])){
         echo '<div class="error"> El campo del identificador esta vacío</div>';
     }else{
-        $cif = $_POST["cif"] ?? null; 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql="INSERT INTO empresa (nombre, cif, nombre_fiscal, email, direccion, localidad, provincia, numero_plazas, telefono, persona_contacto)

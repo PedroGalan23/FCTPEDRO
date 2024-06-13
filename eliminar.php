@@ -1,4 +1,15 @@
 <?php
+session_start();
+echo $_SESSION["id"];
+if(empty($_SESSION["id"])){
+    header("location:login.php");
+}else{
+    //echo" BIEN";
+}
+?>
+
+<?php
+
      $cif=$_GET["cif"];
      $host='localhost';
      $dbname='control_fct';

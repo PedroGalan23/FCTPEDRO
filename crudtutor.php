@@ -1,4 +1,11 @@
 <?php
+session_start();
+ //echo $_SESSION["id"];
+if(empty($_SESSION["id"])){
+    header("location:login.php");
+}else{
+    //echo" BIEN";
+}
 try {
     $pdo=new PDO('mysql:host=localhost;dbname=control_fct','root','');
     $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
@@ -51,7 +58,7 @@ $paginas=ceil($numeroEmpresas/$empresasxPagina);
     
         <div class="principal">
         <h1>Crud Empresa</h1>
-        <a href="login.php"><button>Cerrar Sesion</button></a>
+        <a href="cerrarsesion.php"><button>Cerrar Sesion</button></a>
         </div>                                                                                                                                                                                          <br>
     <?php
         $nombre='%';

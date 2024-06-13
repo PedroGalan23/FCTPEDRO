@@ -28,6 +28,7 @@
         $sql = "SELECT * FROM empresa WHERE cif = :cif";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['cif' => $cif]);
+        //FETCH_ASSOC devuelve un array asociativo (clave valor)
         $empresa = $stmt->fetch(PDO::FETCH_ASSOC);
     
         $nombre = $empresa['nombre'] ?? null;
@@ -39,11 +40,9 @@
         $numero_plazas = $empresa['numero_plazas'] ?? null;
         $telefono = $empresa['telefono'] ?? null;
         $persona_contacto = $empresa['persona_contacto'] ?? null;
-
-
-
     }else{
         //Lo que pasará cuando enviemos el formulario editado
+        $nombrefiltrar=$_POST["nombrefiltrar"] ?? null;
         $cif = $_POST["cif"] ?? null;
         $nombre= $_POST["nombre"] ?? null;
         $nombre_fiscal = $_POST["nombre_fiscal"] ?? null; 
@@ -54,9 +53,11 @@
         $numero_plazas = $_POST["numero_plazas"] ?? null; 
         $telefono = $_POST["telefono"] ?? null; 
         $persona_contacto = $_POST["persona_contacto"] ?? null; 
-        $sql= "UPDATE empresa SET nombre_fiscal=:nombre_fiscal, email=:email, direccion=:direccion, localidad=:localidad, provincia=:provincia, numero_plazas=:numero_plazas, telefono=:telefono, persona_contacto=:persona_contacto WHERE nombre=:nombre";
+        $sql= "UPDATE empresa SET nombre=:nombre, cif=:cif, nombre_fiscal=:nombre_fiscal, email=:email, direccion=:direccion, localidad=:localidad, provincia=:provincia, numero_plazas=:numero_plazas, telefono=:telefono, persona_contacto=:persona_contacto WHERE nombre=:nombrefiltrar";
         $stmt = $pdo->prepare($sql);
         if ( $stmt->execute([
+            'nombre'=>$nombre,
+            'cif'=>$cif,
             ':nombre_fiscal' => $nombre_fiscal,
             ':email' => $email,
             ':direccion' => $direccion,
@@ -65,7 +66,7 @@
             ':numero_plazas' => $numero_plazas,
             ':telefono' => $telefono,
             ':persona_contacto' => $persona_contacto,
-            ':nombre'=> $nombre
+            ':nombrefiltrar'=> $nombrefiltrar
         ])) {
             echo "<script>alert('La empresa [$nombre] con cif [$cif] se modificó correctamente'); location.href='crudtutor.php';</script>";
         } else {
@@ -74,17 +75,14 @@
 
     }
     ?>
-
-
-
     <h1>Modificar Empresa</h1>
     <form action="modificarempresa.php" method="POST">
         <a href="crudtutor.php"><i class="bi bi-x-lg bi-3x"></i></a>
         <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" value="<?php echo $nombre ?>" readonly>
+        <input type="text" name="nombre" value="<?php echo $nombre ?>" >
 
         <label for="cif">Cif:</label>
-        <input type="text" name="cif" value="<?php echo $cif ?>" readonly>
+        <input type="text" name="cif" value="<?php echo $cif ?>" >
         
         <label for="nombre_fiscal">Nombre Fiscal:</label>
         <input type="text" name="nombre_fiscal" value="<?php echo $nombre_fiscal ?>">
@@ -109,6 +107,8 @@
 
         <label for="persona_contacto">Persona de Contacto:</label>
         <input type="text" name="persona_contacto" value="<?php echo $persona_contacto ?>">
+
+        <input type="hidden" name="nombrefiltrar" value="<?php echo $nombre?>">
 
         <label for="modificar"></label>
         <input type="submit" name="modificar" value="Guardar Cambios">

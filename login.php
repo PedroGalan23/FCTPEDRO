@@ -39,7 +39,11 @@
                 $sql_tutor="SELECT * FROM tutor where nombre=? AND password=?";
                 $stmt_tutor = $pdo->prepare($sql_tutor);
                 $stmt_tutor->execute([$usuario,$password]);
+                session_start();
                 if($stmt_tutor->rowCount()> 0){
+                    //echo $usuario;
+                    $_SESSION['id']=$usuario;
+                    //var_dump($_SESSION);
                     header("location:crudtutor.php");
                 }else{
                     echo '<div class="bad">Las credenciales no son válidas</div>';
